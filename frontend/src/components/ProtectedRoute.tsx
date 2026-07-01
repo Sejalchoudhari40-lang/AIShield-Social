@@ -1,0 +1,18 @@
+import { Navigate } from "react-router-dom";
+import { getToken } from "../utils/auth";
+
+type Props = {
+  children: React.ReactNode;
+};
+
+function ProtectedRoute({ children }: Props) {
+  const token = getToken();
+
+  if (!token) {
+    return <Navigate to="/" replace />;
+  }
+
+  return <>{children}</>;
+}
+
+export default ProtectedRoute;
